@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 import { addPurchase } from "../../../../lib/store";
 
+export const runtime = "nodejs";  // ensure this runs in Node.js, not Edge
+
 export async function POST(req: NextRequest) {
   const body = await req.text(); // raw body
   const secret = process.env.STRIPE_WEBHOOK_SECRET || "";
@@ -11,7 +13,7 @@ export async function POST(req: NextRequest) {
   let event: Stripe.Event;
   try {
     event = stripe.webhooks.constructEvent(body, sig, secret);
-  } catch (err:any) {
+  } catch (err: any) {
     return NextResponse.json({ error: `Webhook Error: ${err.message}` }, { status: 400 });
   }
 
@@ -23,11 +25,6 @@ export async function POST(req: NextRequest) {
       addPurchase(email, productId);
     }
   }
+
   return NextResponse.json({ received: true });
 }
-
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
