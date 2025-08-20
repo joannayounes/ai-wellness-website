@@ -1,3 +1,4 @@
+export const runtime = "nodejs";
 import { NextRequest, NextResponse } from "next/server";
 import { signSession } from "../../../../lib/token";
 import nodemailer from "nodemailer";
