@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 import { addPurchase } from "../../../../lib/store";
 
-export const runtime = "nodejs";  // ensure this runs in Node.js, not Edge
+export const runtime = "nodejs";  // Node runtime
 
 export async function POST(req: NextRequest) {
   const body = await req.text(); // raw body
