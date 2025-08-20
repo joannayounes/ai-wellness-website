@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import { cookies } from "next/headers";
 import { verifySession } from "../../lib/token";
 import { getPurchases } from "../../lib/store";
